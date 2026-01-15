@@ -1,0 +1,94 @@
+<WeatherUI>:
+    orientation: "vertical"
+    padding: 10
+    spacing: 10
+
+    canvas.before:
+        Color:
+            rgba: 1,1,1,1   
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    Label:
+        text: root.translations[root.lang]["title"]
+        font_name: "NotoSansMeeteiMayek-Medium"
+        font_size: "28sp"
+        size_hint_y: None
+        height: 70
+        bold: True
+        color: 0,0,0,1
+        padding: 15
+        text_size: self.width, None
+    Widget:
+        size_hint_y: None
+        height: 30
+
+    Label:
+        text: root.translations[root.lang]["forecast"]
+        font_name: "NotoSansMeeteiMayek-Medium"
+        halign: "left"
+        font_size: "24sp"
+        size_hint_y: None
+        height: 50
+        bold: True
+        color: 0,0,0,1
+        
+
+    ScrollView:
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: 20
+            padding: 10
+
+            BoxLayout:
+                orientation: "vertical"
+                padding: [25,10,10,10]
+                size_hint: None, None
+                width: root.width * 0.55
+                height: 180
+                pos_hint: {"center_x": 0.5}
+
+                canvas.before:
+                    Color:
+                        rgba: 1,0.6,0.8,1
+                    RoundedRectangle:
+                        pos: self.pos
+                        size: self.size
+                        radius: [25]
+
+
+                Label:
+                    text:root.translations[root.lang]["today"]
+                    font_name: "NotoSansMeeteiMayek-Medium"
+                    bold: True
+                    font_size: "18sp"
+                    color: 0,0,0,1
+
+                Label:
+                    text:root.translations[root.lang]["temp"] + ": " + str(root.today_tempMax) + "-" + str(root.today_tempMin) +" °C"
+                    font_name: "NotoSansMeeteiMayek-Medium"
+                    color: 0,0,0,1
+
+                Label:
+                    text:root.translations[root.lang]["rain"] + ": " + str(root.today_rain)+" mm"
+                    font_name: "NotoSansMeeteiMayek-Medium"
+                    color: 0,0,0,1
+
+                Button:
+                    text: root.translations[root.lang]["more"]
+                    font_name: "NotoSansMeeteiMayek-Medium"
+                    size_hint_y: None
+                    background_normal: ""
+                    background_down: ""
+                    color: 0.9,0.2,0.5,1  
+                    background_color: 1,1,1,1
+                    height: 40
+                    on_press: root.show_details("today")
+    Button:
+        text: "Switch Language"
+        size_hint_y: None
+        height: 40
+        on_press: root.switch_lang()
